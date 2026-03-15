@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Promise</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #f5f0ff 0%, #e8f4f8 50%, #fff0f5 100%);
+      color: #3d3d5c;
+    }
+
+    .title-font {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.74);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .promise-card {
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .promise-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .soft-rise {
+      animation: softRise 0.9s ease forwards;
+    }
+
+    @keyframes softRise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn-soft {
+      transition: all 0.25s ease;
+    }
+
+    .btn-soft:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(157, 141, 187, 0.22);
+    }
+
+    .glow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #c7b8de;
+      box-shadow: 0 0 12px rgba(199, 184, 222, 0.8);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-8">
+  <main class="w-full max-w-lg">
+    <div class="card rounded-3xl shadow-xl border border-purple-100 px-6 py-10 text-center">
+      <div class="soft-rise">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="h-px w-12 bg-gradient-to-r from-transparent to-[#d3c6e8]"></div>
+          <div class="glow-dot"></div>
+          <div class="h-px w-12 bg-gradient-to-l from-transparent to-[#d3c6e8]"></div>
+        </div>
+
+        <p class="uppercase tracking-[0.25em] text-[11px] text-[#a08fba] mb-3">
+          Your Promise
+        </p>
+
+        <h1 id="nameTitle" class="title-font text-4xl md:text-5xl font-bold text-[#4a3d5c] leading-tight mb-3">
+          Friend, the Lord has a promise for you today
+        </h1>
+
+        <p class="text-sm text-[#8b7fa1] mb-8">
+          Receive this word with faith and encouragement
+        </p>
+      </div>
+
+      <div id="promise-card" class="promise-card rounded-3xl border border-purple-100 bg-white/80 px-6 py-8 shadow-sm">
+        <p id="promise-number" class="uppercase tracking-[0.22em] text-[11px] text-[#a08fba] mb-4">
+          Promise
+        </p>
+
+        <p id="promise-text" class="title-font text-3xl font-semibold italic leading-relaxed text-[#4a3d5c]"></p>
+
+        <p id="promise-ref" class="mt-5 text-sm font-medium tracking-[0.04em] text-[#b39dcb]"></p>
+      </div>
+
+      <div class="mt-8 flex flex-col items-center gap-3">
+        <button
+          id="anotherBtn"
+          class="btn-soft inline-flex items-center justify-center rounded-full px-8 py-3 bg-[#b8a8d4] text-white font-medium"
+        >
+          Receive Another Promise
+        </button>
+
+        <a
+          href="index.html"
+          class="text-sm text-[#8b7fa1] underline underline-offset-4"
+        >
+          Enter another name
+        </a>
+
+        <p class="mt-2 text-xs text-[#b4a6ca]">
+          <span id="count">0</span> of 30 promises revealed on this device
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const promises = [
+      { text: "God is with you and you will not be shaken.", ref: "Psalm 46:5" },
+      { text: "God will help you at the right time.", ref: "Psalm 46:5" },
+      { text: "You carry God's image and His divine value.", ref: "Genesis 1:27" },
+      { text: "You were intentionally created by God.", ref: "Genesis 1:27" },
+      { text: "In Christ you are fully accepted and belong to God's family.", ref: "Galatians 3:28" },
+      { text: "Your identity in Christ is greater than any label.", ref: "Galatians 3:28" },
+      { text: "God sees you and knows your story.", ref: "Genesis 16:13" },
+      { text: "God sees every struggle and every tear.", ref: "Genesis 16:13" },
+      { text: "God can raise women to lead with wisdom and courage.", ref: "Judges 4:4–5" },
+      { text: "God can use your voice to bring guidance and justice.", ref: "Judges 4:4–5" },
+      { text: "God has placed you where you are for a purpose.", ref: "Esther 4:14" },
+      { text: "Your life is part of God's divine timing.", ref: "Esther 4:14" },
+      { text: "You were born for such a time as this.", ref: "Esther 4:14" },
+      { text: "God loves you deeply and completely.", ref: "John 3:16" },
+      { text: "Through Jesus you have the promise of eternal life.", ref: "John 3:16" },
+      { text: "Your life is precious in the sight of God.", ref: "Isaiah 62:3" },
+      { text: "You are like a crown of beauty in God's hand.", ref: "Isaiah 62:3" },
+      { text: "God holds your life with honour and care.", ref: "Isaiah 62:3" },
+      { text: "You are wonderfully made by God's design.", ref: "Psalm 139:14" },
+      { text: "Your life is a masterpiece created by God.", ref: "Psalm 139:14" },
+      { text: "There is purpose and beauty in the way God made you.", ref: "Psalm 139:14" },
+      { text: "God's work in you is marvellous.", ref: "Psalm 139:14" },
+      { text: "A gracious heart will bring honour to your life.", ref: "Proverbs 11:16" },
+      { text: "God honours a woman who walks in grace.", ref: "Proverbs 11:16" },
+      { text: "Your kindness and grace will not go unnoticed.", ref: "Proverbs 11:16" },
+      { text: "God's presence within you gives you strength.", ref: "Psalm 46:5" },
+      { text: "You are seen, known, and valued by God.", ref: "Genesis 16:13" },
+      { text: "God's purpose for your life is greater than you imagine.", ref: "Esther 4:14" },
+      { text: "Your life reflects the glory of your Creator.", ref: "Genesis 1:27" },
+      { text: "God's love for you is everlasting.", ref: "John 3:16" }
+    ];
+
+    const revealed = new Set();
+
+    function getNameFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const rawName = params.get('name') || 'Friend';
+      const safeName = rawName.trim().slice(0, 40);
+      return safeName || 'Friend';
+    }
+
+    function setNameHeading() {
+      const name = getNameFromUrl();
+      document.getElementById('nameTitle').textContent = `${name}, the Lord has a promise for you today`;
+    }
+
+    function getRandomPromise() {
+      if (revealed.size >= promises.length) {
+        revealed.clear();
+      }
+
+      let index;
+      do {
+        index = Math.floor(Math.random() * promises.length);
+      } while (revealed.has(index) && revealed.size < promises.length);
+
+      revealed.add(index);
+
+      return {
+        promise: promises[index],
+        number: index + 1
+      };
+    }
+
+    function showPromise() {
+      const card = document.getElementById('promise-card');
+      card.classList.remove('visible');
+
+      const { promise, number } = getRandomPromise();
+
+      setTimeout(() => {
+        document.getElementById('promise-number').textContent = `Promise #${number}`;
+        document.getElementById('promise-text').textContent = `"${promise.text}"`;
+        document.getElementById('promise-ref').textContent = `— ${promise.ref}`;
+        document.getElementById('count').textContent = revealed.size;
+
+        requestAnimationFrame(() => {
+          card.classList.add('visible');
+        });
+      }, 120);
+    }
+
+    document.getElementById('anotherBtn').addEventListener('click', showPromise);
+
+    window.addEventListener('load', () => {
+      setNameHeading();
+      showPromise();
+    });
+  </script>
+</body>
+</html>
