@@ -1,338 +1,163 @@
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>God Has a Promise for You Today</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
+<title>God Has a Promise for You</title>
 
-    body {
-      box-sizing: border-box;
-      font-family: 'Outfit', sans-serif;
-      background: linear-gradient(135deg, #f5f0ff 0%, #e8f4f8 50%, #fff0f5 100%);
-      color: #3d3d5c;
-    }
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 
-    .fade-in-up {
-      animation: fadeInUp 0.8s ease forwards;
-    }
+<style>
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+body{
+font-family:'Outfit',sans-serif;
+background:linear-gradient(135deg,#f5f0ff 0%,#e8f4f8 50%,#fff0f5 100%);
+color:#3d3d5c;
+}
 
-    .stagger-1 { animation-delay: 0.1s; opacity: 0; }
-    .stagger-2 { animation-delay: 0.3s; opacity: 0; }
-    .stagger-3 { animation-delay: 0.5s; opacity: 0; }
-    .stagger-4 { animation-delay: 0.7s; opacity: 0; }
+.title{
+font-family:'Cormorant Garamond',serif;
+}
 
-    .ornament-line {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, currentColor, transparent);
-    }
+.promise-card{
+opacity:0;
+transform:translateY(20px);
+transition:all .6s ease;
+}
 
-    .promise-card {
-      opacity: 0;
-      transform: translateY(30px) scale(0.96);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+.promise-card.visible{
+opacity:1;
+transform:translateY(0);
+}
 
-    .promise-card.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .scripture-ref {
-      opacity: 0;
-      transition: opacity 0.5s ease 0.25s;
-    }
-
-    .promise-card.visible .scripture-ref {
-      opacity: 1;
-    }
-
-    .btn-promise {
-      transition: all 0.3s ease;
-    }
-
-    .btn-promise:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    .sparkle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: sparkleFloat 1.2s ease-out forwards;
-    }
-
-    @keyframes sparkleFloat {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--tx), var(--ty)) scale(0);
-      }
-    }
-
-    .hero-circle {
-      width: 180px;
-      height: 180px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(184, 168, 212, 0.18));
-      border: 1px solid rgba(184, 168, 212, 0.28);
-      box-shadow: 0 12px 40px rgba(184, 168, 212, 0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-circle::before,
-    .hero-circle::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      border: 1px solid rgba(184, 168, 212, 0.22);
-    }
-
-    .hero-circle::before {
-      inset: 14px;
-    }
-
-    .hero-circle::after {
-      inset: 28px;
-    }
-  </style>
+</style>
 </head>
 
-<body class="h-full overflow-auto">
-  <main id="app-wrapper" class="w-full min-h-full" style="background: linear-gradient(160deg, #f5f0ff 0%, #e8f4f8 30%, #f0f5ff 60%, #fff5fa 100%);">
-    <div class="flex flex-col items-center justify-center min-h-full px-4 py-10 relative">
-      
-      <!-- Header -->
-      <header class="text-center mb-8 fade-in-up stagger-1">
-        <div class="flex items-center justify-center gap-3 mb-3">
-          <div class="ornament-line" style="color: #b8a8d4;"></div>
-          <i data-lucide="sparkles" style="width: 18px; height: 18px; color: #b8a8d4;"></i>
-          <div class="ornament-line" style="color: #b8a8d4;"></div>
-        </div>
+<body class="flex items-center justify-center min-h-screen px-4">
 
-        <h1 id="main-title" style="font-family: 'Cormorant Garamond', serif; color: #4a3d5c; font-size: 34px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.2;">
-          God Has a Promise for You Today
-        </h1>
+<div class="max-w-md w-full text-center">
 
-        <p id="subtitle-text" class="mt-2" style="color: #8b7fa1; font-size: 14px; font-weight: 300; letter-spacing: 0.05em;">
-          A Mother’s Day blessing to encourage your heart
-        </p>
-      </header>
+<h1 class="title text-4xl font-bold mb-2 text-[#4a3d5c]">
+God Has a Promise for You
+</h1>
 
-      <!-- Decorative centrepiece -->
-      <!-- <div id="hero-area" class="fade-in-up stagger-2 mb-8 relative">
-        <div class="hero-circle" aria-hidden="true">
-          <div class="flex flex-col items-center justify-center text-center px-4">
-            <i data-lucide="heart-handshake" style="width: 34px; height: 34px; color: #9d8dbb; margin-bottom: 10px;"></i>
-            <p style="font-family: 'Cormorant Garamond', serif; color: #6e5f8a; font-size: 24px; font-weight: 600; line-height: 1.2;">
-              Promise
-            </p>
-            <p style="color: #8b7fa1; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px;">
-              from God
-            </p>
-          </div>
-        </div>
-      </div>-->
+<p class="text-sm mb-8 text-[#8b7fa1]">
+Receive a promise from God's Word
+</p>
 
-      <!-- Intro hint -->
-      <p id="tap-hint" class="fade-in-up stagger-3 text-center mb-6 flex items-center gap-2" style="color: #8b7fa1; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
-        <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
-        Your promise has been chosen for you
-      </p>
+<div id="promise-card" class="promise-card bg-white/70 backdrop-blur rounded-2xl p-8 shadow-lg border border-purple-200">
 
-      <!-- Promise Card -->
-      <div id="promise-card" class="promise-card w-full max-w-md mx-auto mb-6" style="display: none;">
-        <div class="relative rounded-2xl p-8 text-center" style="background: linear-gradient(135deg, rgba(184, 168, 212, 0.12) 0%, rgba(184, 168, 212, 0.05) 100%); border: 1px solid rgba(184, 168, 212, 0.2); backdrop-filter: blur(8px);">
-          
-          <div class="flex items-center justify-center gap-2 mb-5">
-            <div class="ornament-line" style="color: #b8a8d4;"></div>
-            <i data-lucide="heart" style="width: 14px; height: 14px; color: #b8a8d4; fill: #b8a8d4;"></i>
-            <div class="ornament-line" style="color: #b8a8d4;"></div>
-          </div>
+<p id="promise-number" class="text-xs tracking-widest uppercase mb-3 text-purple-400">
+Promise
+</p>
 
-          <p id="promise-number" style="color: #8b7fa1; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;">
-            Promise #1 of 30
-          </p>
+<p id="promise-text" class="title text-2xl italic font-semibold leading-relaxed text-[#4a3d5c]"></p>
 
-          <p id="promise-text" style="font-family: 'Cormorant Garamond', serif; color: #4a3d5c; font-size: 24px; font-weight: 600; line-height: 1.5; font-style: italic;"></p>
+<p id="promise-ref" class="mt-4 text-sm font-medium text-purple-400"></p>
 
-          <p id="promise-ref" class="scripture-ref mt-5" style="color: #b8a8d4; font-size: 13px; font-weight: 500; letter-spacing: 0.05em;"></p>
+</div>
 
-          <div class="flex items-center justify-center gap-2 mt-5">
-            <div class="ornament-line" style="color: rgba(184, 168, 212, 0.4);"></div>
-            <div style="width: 4px; height: 4px; border-radius: 50%; background: #b8a8d4;"></div>
-            <div class="ornament-line" style="color: rgba(184, 168, 212, 0.4);"></div>
-          </div>
-        </div>
-      </div>
+<button
+id="another-btn"
+class="mt-8 px-8 py-3 rounded-full bg-purple-300 text-white font-medium shadow hover:shadow-lg transition"
+style="display:none;"
+>
+Receive Another Promise
+</button>
 
-      <!-- Button -->
-      <button
-        id="another-btn"
-        class="btn-promise fade-in-up rounded-full px-8 py-3 flex items-center gap-2"
-        style="display: none; background: linear-gradient(135deg, #b8a8d4, #9d8dbb); color: #f5f0ff; font-weight: 500; font-size: 14px; letter-spacing: 0.03em; border: none; cursor: pointer;"
-        aria-label="Receive another promise"
-      >
-        <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i>
-        <span id="btn-label">Receive Another Promise</span>
-      </button>
+<p id="counter" class="mt-6 text-xs text-purple-300 tracking-widest" style="display:none;">
+<span id="count">0</span> of 30 promises revealed
+</p>
 
-      <!-- Counter -->
-      <p id="counter-text" class="mt-6 text-center" style="display: none; color: #a89cc1; font-size: 11px; letter-spacing: 0.1em;">
-        <span id="revealed-count">0</span> of 30 promises revealed on this device
-      </p>
+</div>
 
-      <!-- Footer -->
-      <footer class="mt-auto pt-8 pb-4 text-center fade-in-up stagger-4">
-        <p style="color: #d4c5e8; font-size: 11px; letter-spacing: 0.08em;">✦ 30 Promises of God ✦</p>
-      </footer>
-    </div>
-  </main>
+<script>
 
-  <script>
-    const promises = [
-      { text: "God is with you and you will not be shaken.", ref: "Psalm 46:5" },
-      { text: "God will help you at the right time.", ref: "Psalm 46:5" },
-      { text: "You carry God's image and His divine value.", ref: "Genesis 1:27" },
-      { text: "You were intentionally created by God.", ref: "Genesis 1:27" },
-      { text: "In Christ you are fully accepted and belong to God's family.", ref: "Galatians 3:28" },
-      { text: "Your identity in Christ is greater than any label.", ref: "Galatians 3:28" },
-      { text: "God sees you and knows your story.", ref: "Genesis 16:13" },
-      { text: "God sees every struggle and every tear.", ref: "Genesis 16:13" },
-      { text: "God can raise women to lead with wisdom and courage.", ref: "Judges 4:4–5" },
-      { text: "God can use your voice to bring guidance and justice.", ref: "Judges 4:4–5" },
-      { text: "God has placed you where you are for a purpose.", ref: "Esther 4:14" },
-      { text: "Your life is part of God's divine timing.", ref: "Esther 4:14" },
-      { text: "You were born for such a time as this.", ref: "Esther 4:14" },
-      { text: "God loves you deeply and completely.", ref: "John 3:16" },
-      { text: "Through Jesus, you have the promise of eternal life.", ref: "John 3:16" },
-      { text: "Your life is precious in the sight of God.", ref: "Isaiah 62:3" },
-      { text: "You are like a crown of beauty in God's hand.", ref: "Isaiah 62:3" },
-      { text: "God holds your life with honour and care.", ref: "Isaiah 62:3" },
-      { text: "You are wonderfully made by God's design.", ref: "Psalm 139:14" },
-      { text: "Your life is a masterpiece created by God.", ref: "Psalm 139:14" },
-      { text: "There is purpose and beauty in the way God made you.", ref: "Psalm 139:14" },
-      { text: "God's work in you is marvellous.", ref: "Psalm 139:14" },
-      { text: "A gracious heart will bring honour to your life.", ref: "Proverbs 11:16" },
-      { text: "God honours a woman who walks in grace.", ref: "Proverbs 11:16" },
-      { text: "Your kindness and grace will not go unnoticed.", ref: "Proverbs 11:16" },
-      { text: "God's presence within you gives you strength.", ref: "Psalm 46:5" },
-      { text: "You are seen, known, and valued by God.", ref: "Genesis 16:13" },
-      { text: "God's purpose for your life is greater than you imagine.", ref: "Esther 4:14" },
-      { text: "Your life reflects the glory of your Creator.", ref: "Genesis 1:27" },
-      { text: "God's love for you is everlasting.", ref: "John 3:16" }
-    ];
+const promises = [
 
-    let revealedIndices = new Set();
-    let currentIndex = -1;
-    let hasRevealed = false;
+{ text:"God is with you and you will not be shaken.", ref:"Psalm 46:5" },
+{ text:"God will help you at the right time.", ref:"Psalm 46:5" },
+{ text:"You carry God's image and His divine value.", ref:"Genesis 1:27" },
+{ text:"You were intentionally created by God.", ref:"Genesis 1:27" },
+{ text:"In Christ you are fully accepted and belong to God's family.", ref:"Galatians 3:28" },
+{ text:"Your identity in Christ is greater than any label.", ref:"Galatians 3:28" },
+{ text:"God sees you and knows your story.", ref:"Genesis 16:13" },
+{ text:"God sees every struggle and every tear.", ref:"Genesis 16:13" },
+{ text:"God can raise women to lead with wisdom and courage.", ref:"Judges 4:4–5" },
+{ text:"God can use your voice to bring guidance and justice.", ref:"Judges 4:4–5" },
+{ text:"God has placed you where you are for a purpose.", ref:"Esther 4:14" },
+{ text:"Your life is part of God's divine timing.", ref:"Esther 4:14" },
+{ text:"You were born for such a time as this.", ref:"Esther 4:14" },
+{ text:"God loves you deeply and completely.", ref:"John 3:16" },
+{ text:"Through Jesus you have the promise of eternal life.", ref:"John 3:16" },
+{ text:"Your life is precious in the sight of God.", ref:"Isaiah 62:3" },
+{ text:"You are like a crown of beauty in God's hand.", ref:"Isaiah 62:3" },
+{ text:"God holds your life with honour and care.", ref:"Isaiah 62:3" },
+{ text:"You are wonderfully made by God's design.", ref:"Psalm 139:14" },
+{ text:"Your life is a masterpiece created by God.", ref:"Psalm 139:14" },
+{ text:"There is purpose and beauty in the way God made you.", ref:"Psalm 139:14" },
+{ text:"God's work in you is marvellous.", ref:"Psalm 139:14" },
+{ text:"A gracious heart will bring honour to your life.", ref:"Proverbs 11:16" },
+{ text:"God honours a woman who walks in grace.", ref:"Proverbs 11:16" },
+{ text:"Your kindness and grace will not go unnoticed.", ref:"Proverbs 11:16" },
+{ text:"God's presence within you gives you strength.", ref:"Psalm 46:5" },
+{ text:"You are seen known and valued by God.", ref:"Genesis 16:13" },
+{ text:"God's purpose for your life is greater than you imagine.", ref:"Esther 4:14" },
+{ text:"Your life reflects the glory of your Creator.", ref:"Genesis 1:27" },
+{ text:"God's love for you is everlasting.", ref:"John 3:16" }
 
-    function getRandomPromise() {
-      if (revealedIndices.size >= promises.length) {
-        revealedIndices.clear();
-      }
+];
 
-      let idx;
-      do {
-        idx = Math.floor(Math.random() * promises.length);
-      } while (revealedIndices.has(idx) && revealedIndices.size < promises.length);
+let revealed = new Set();
 
-      revealedIndices.add(idx);
-      currentIndex = idx;
+function randomPromise(){
 
-      return {
-        promise: promises[idx],
-        number: idx + 1
-      };
-    }
+if(revealed.size===promises.length){
+revealed.clear();
+}
 
-    function createSparkles(x, y) {
-      const colors = ['#b8a8d4', '#d4c5e8', '#e8dff0', '#f0f5ff'];
+let index;
 
-      for (let i = 0; i < 12; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
+do{
+index=Math.floor(Math.random()*promises.length);
+}
+while(revealed.has(index));
 
-        const angle = (Math.PI * 2 * i) / 12;
-        const dist = 40 + Math.random() * 60;
+revealed.add(index);
 
-        sparkle.style.cssText = `
-          left: ${x}px;
-          top: ${y}px;
-          background: ${colors[Math.floor(Math.random() * colors.length)]};
-          --tx: ${Math.cos(angle) * dist}px;
-          --ty: ${Math.sin(angle) * dist}px;
-          width: ${3 + Math.random() * 4}px;
-          height: ${3 + Math.random() * 4}px;
-        `;
+return{
+promise:promises[index],
+number:index+1
+};
 
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 1200);
-      }
-    }
+}
 
-    function displayPromise() {
-      const { promise, number } = getRandomPromise();
+function showPromise(){
 
-      const hero = document.getElementById('hero-area').getBoundingClientRect();
-      createSparkles(hero.left + hero.width / 2, hero.top + hero.height / 2);
+const {promise,number}=randomPromise();
 
-      const card = document.getElementById('promise-card');
-      const btn = document.getElementById('another-btn');
-      const counter = document.getElementById('counter-text');
-      const hint = document.getElementById('tap-hint');
+document.getElementById("promise-text").textContent=`"${promise.text}"`;
+document.getElementById("promise-ref").textContent=`— ${promise.ref}`;
 
-      card.classList.remove('visible');
+document.getElementById("promise-number").textContent=`Promise #${number}`;
 
-      setTimeout(() => {
-        document.getElementById('promise-text').textContent = `"${promise.text}"`;
-        document.getElementById('promise-ref').textContent = `— ${promise.ref}`;
-        document.getElementById('promise-number').textContent = `Promise #${number} of 30`;
-        document.getElementById('revealed-count').textContent = revealedIndices.size;
+document.getElementById("count").textContent=revealed.size;
 
-        card.style.display = 'block';
-        btn.style.display = 'flex';
-        counter.style.display = 'block';
-        hint.textContent = "A promise has been chosen for you";
+document.getElementById("promise-card").classList.add("visible");
 
-        requestAnimationFrame(() => {
-          card.classList.add('visible');
-        });
-      }, hasRevealed ? 260 : 120);
+document.getElementById("another-btn").style.display="inline-block";
 
-      hasRevealed = true;
-    }
+document.getElementById("counter").style.display="block";
 
-    document.getElementById('another-btn').addEventListener('click', displayPromise);
+}
 
-    window.addEventListener('load', () => {
-      displayPromise();
-      lucide.createIcons();
-    });
-  </script>
+document.getElementById("another-btn").addEventListener("click",showPromise);
+
+window.onload=showPromise;
+
+</script>
+
 </body>
 </html>
