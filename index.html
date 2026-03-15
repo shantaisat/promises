@@ -1,163 +1,117 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receive Your Promise</title>
 
-<title>God Has a Promise for You</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #f5f0ff 0%, #e8f4f8 50%, #fff0f5 100%);
+      color: #3d3d5c;
+    }
 
-<style>
+    .title-font {
+      font-family: 'Cormorant Garamond', serif;
+    }
 
-body{
-font-family:'Outfit',sans-serif;
-background:linear-gradient(135deg,#f5f0ff 0%,#e8f4f8 50%,#fff0f5 100%);
-color:#3d3d5c;
-}
+    .card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
 
-.title{
-font-family:'Cormorant Garamond',serif;
-}
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
 
-.promise-card{
-opacity:0;
-transform:translateY(20px);
-transition:all .6s ease;
-}
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.promise-card.visible{
-opacity:1;
-transform:translateY(0);
-}
+    .btn-soft {
+      transition: all 0.25s ease;
+    }
 
-</style>
+    .btn-soft:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(157, 141, 187, 0.22);
+    }
+  </style>
 </head>
+<body class="min-h-screen flex items-center justify-center px-4 py-8">
+  <main class="w-full max-w-md">
+    <div class="card rounded-3xl shadow-xl border border-purple-100 px-6 py-10 text-center fade-in">
+      <p class="uppercase tracking-[0.25em] text-[11px] text-[#a08fba] mb-3">
+        Mother’s Day Blessing
+      </p>
 
-<body class="flex items-center justify-center min-h-screen px-4">
+      <h1 class="title-font text-4xl md:text-5xl font-bold text-[#4a3d5c] leading-tight mb-3">
+        God Has a Promise for You
+      </h1>
 
-<div class="max-w-md w-full text-center">
+      <p class="text-sm text-[#8b7fa1] mb-8">
+        Enter your name to receive a promise from God’s Word
+      </p>
 
-<h1 class="title text-4xl font-bold mb-2 text-[#4a3d5c]">
-God Has a Promise for You
-</h1>
+      <div class="text-left mb-4">
+        <label for="nameInput" class="block text-sm font-medium text-[#6f6288] mb-2">
+          Your name
+        </label>
+        <input
+          id="nameInput"
+          type="text"
+          placeholder="Enter your name"
+          class="w-full rounded-2xl border border-purple-200 bg-white px-4 py-3 text-center text-[#4a3d5c] outline-none focus:ring-2 focus:ring-purple-200"
+          maxlength="40"
+        >
+      </div>
 
-<p class="text-sm mb-8 text-[#8b7fa1]">
-Receive a promise from God's Word
-</p>
+      <button
+        id="submitBtn"
+        class="btn-soft mt-3 inline-flex items-center justify-center rounded-full px-8 py-3 bg-[#b8a8d4] text-white font-medium"
+      >
+        Receive Your Promise
+      </button>
 
-<div id="promise-card" class="promise-card bg-white/70 backdrop-blur rounded-2xl p-8 shadow-lg border border-purple-200">
+      <p class="mt-6 text-xs text-[#b4a6ca]">
+        A personal word of encouragement for today
+      </p>
+    </div>
+  </main>
 
-<p id="promise-number" class="text-xs tracking-widest uppercase mb-3 text-purple-400">
-Promise
-</p>
+  <script>
+    function goToPromise() {
+      const input = document.getElementById('nameInput');
+      const name = input.value.trim();
 
-<p id="promise-text" class="title text-2xl italic font-semibold leading-relaxed text-[#4a3d5c]"></p>
+      if (!name) {
+        alert('Please enter your name first.');
+        input.focus();
+        return;
+      }
 
-<p id="promise-ref" class="mt-4 text-sm font-medium text-purple-400"></p>
+      window.location.href = 'promise.html?name=' + encodeURIComponent(name);
+    }
 
-</div>
+    document.getElementById('submitBtn').addEventListener('click', goToPromise);
 
-<button
-id="another-btn"
-class="mt-8 px-8 py-3 rounded-full bg-purple-300 text-white font-medium shadow hover:shadow-lg transition"
-style="display:none;"
->
-Receive Another Promise
-</button>
-
-<p id="counter" class="mt-6 text-xs text-purple-300 tracking-widest" style="display:none;">
-<span id="count">0</span> of 30 promises revealed
-</p>
-
-</div>
-
-<script>
-
-const promises = [
-
-{ text:"God is with you and you will not be shaken.", ref:"Psalm 46:5" },
-{ text:"God will help you at the right time.", ref:"Psalm 46:5" },
-{ text:"You carry God's image and His divine value.", ref:"Genesis 1:27" },
-{ text:"You were intentionally created by God.", ref:"Genesis 1:27" },
-{ text:"In Christ you are fully accepted and belong to God's family.", ref:"Galatians 3:28" },
-{ text:"Your identity in Christ is greater than any label.", ref:"Galatians 3:28" },
-{ text:"God sees you and knows your story.", ref:"Genesis 16:13" },
-{ text:"God sees every struggle and every tear.", ref:"Genesis 16:13" },
-{ text:"God can raise women to lead with wisdom and courage.", ref:"Judges 4:4–5" },
-{ text:"God can use your voice to bring guidance and justice.", ref:"Judges 4:4–5" },
-{ text:"God has placed you where you are for a purpose.", ref:"Esther 4:14" },
-{ text:"Your life is part of God's divine timing.", ref:"Esther 4:14" },
-{ text:"You were born for such a time as this.", ref:"Esther 4:14" },
-{ text:"God loves you deeply and completely.", ref:"John 3:16" },
-{ text:"Through Jesus you have the promise of eternal life.", ref:"John 3:16" },
-{ text:"Your life is precious in the sight of God.", ref:"Isaiah 62:3" },
-{ text:"You are like a crown of beauty in God's hand.", ref:"Isaiah 62:3" },
-{ text:"God holds your life with honour and care.", ref:"Isaiah 62:3" },
-{ text:"You are wonderfully made by God's design.", ref:"Psalm 139:14" },
-{ text:"Your life is a masterpiece created by God.", ref:"Psalm 139:14" },
-{ text:"There is purpose and beauty in the way God made you.", ref:"Psalm 139:14" },
-{ text:"God's work in you is marvellous.", ref:"Psalm 139:14" },
-{ text:"A gracious heart will bring honour to your life.", ref:"Proverbs 11:16" },
-{ text:"God honours a woman who walks in grace.", ref:"Proverbs 11:16" },
-{ text:"Your kindness and grace will not go unnoticed.", ref:"Proverbs 11:16" },
-{ text:"God's presence within you gives you strength.", ref:"Psalm 46:5" },
-{ text:"You are seen known and valued by God.", ref:"Genesis 16:13" },
-{ text:"God's purpose for your life is greater than you imagine.", ref:"Esther 4:14" },
-{ text:"Your life reflects the glory of your Creator.", ref:"Genesis 1:27" },
-{ text:"God's love for you is everlasting.", ref:"John 3:16" }
-
-];
-
-let revealed = new Set();
-
-function randomPromise(){
-
-if(revealed.size===promises.length){
-revealed.clear();
-}
-
-let index;
-
-do{
-index=Math.floor(Math.random()*promises.length);
-}
-while(revealed.has(index));
-
-revealed.add(index);
-
-return{
-promise:promises[index],
-number:index+1
-};
-
-}
-
-function showPromise(){
-
-const {promise,number}=randomPromise();
-
-document.getElementById("promise-text").textContent=`"${promise.text}"`;
-document.getElementById("promise-ref").textContent=`— ${promise.ref}`;
-
-document.getElementById("promise-number").textContent=`Promise #${number}`;
-
-document.getElementById("count").textContent=revealed.size;
-
-document.getElementById("promise-card").classList.add("visible");
-
-document.getElementById("another-btn").style.display="inline-block";
-
-document.getElementById("counter").style.display="block";
-
-}
-
-document.getElementById("another-btn").addEventListener("click",showPromise);
-
-window.onload=showPromise;
-
-</script>
-
+    document.getElementById('nameInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        goToPromise();
+      }
+    });
+  </script>
 </body>
 </html>
